@@ -1,0 +1,7 @@
+head-subj := head-subj-phrase &
+	[ SYNSEM.LOCAL.CAT.VAL.COMPS null ]. 
+head-comp := head-comp-phrase .
+head-spec := head-spec-phrase .
+pronoun-covert-det := pronoun-covert-det-phrase .
+other-covert-det := other-covert-det-phrase .
+adj-head-scop := adj-head-scop-phrase .

@@ -1,0 +1,201 @@
+;;; Dine` Bizaad: Navajo language. 
+;;; The main source for the linguistic data is (Young and Morgan 1987) and previous 
+;;; Revisions of the now enormous dictionary.  This 'dictionary' had a grammar sketch
+;;; and lots of raw data and example sentences.
+;;; "The Navajo Verb" (Faltz 1998) is where a lot of the verb argument structure
+;;; data came from.  "Navajo Language Investigations" (Fernald and Hale eds, 2000)
+;;; is the source of a lot of highly annotated linguistic data.   The paper 
+;;; 'Definite and Indefinate Descriptions in Navajo' from that collection is the 
+;;; source of the semantic descriptions.
+
+;; Basic word type declarations
+
+noun := head &
+	[ MOD < > ].
+verb := head &
+	[ FORM form ] &
+	[ MOD < > ].
+pp := head &
+	[ MOD < > ].
+det := head & 
+	[ MOD < > ].
+adv := head.
+
+det-lex := basic-determiner-lex & 
+	[ SYNSEM.LOCAL [ CAT [ HEAD det, 
+			       VAL [ SPR < >,
+			       	     COMPS < >,
+				     SUBJ < > ]]]].
+
+noun-lex := basic-noun-lex & basic-one-arg &
+  [ SYNSEM.LOCAL [ CAT [ HEAD noun,
+                    	 VAL [ SPR < #spr & [ LOCAL.CAT.HEAD det ] >,
+                               COMPS < >,
+                               SUBJ < >,
+                               SPEC < > ]],
+	           ARG-S < #spr > ]].
+
+intransitive-verb-lex := basic-verb-lex & intransitive-lex-item &
+	[SYNSEM.LOCAL [ CAT [ HEAD verb & [ FORM fin ],
+			      VAL [ SPR <  >,
+				    COMPS < >,
+				    SUBJ < #sub >,
+			   	    SPEC < > ]],
+			      ARG-S < #sub &[LOCAL.CAT [HEAD noun, VAL.SPR < > ]]>  ]].
+
+transitive-verb-lex := basic-verb-lex & transitive-lex-item &
+	[SYNSEM.LOCAL [ CAT [ HEAD verb & [ FORM fin ],
+			      VAL [ SPR <  >,
+				    COMPS < #comps >,
+				    SUBJ < #sub >,
+			   	    SPEC < > ]],
+    			            ARG-S < #sub&synsem &[LOCAL.CAT [HEAD noun, 
+				    				     VAL.SPR < > ]] , 
+				    #comps& [LOCAL.CAT.HEAD noun] > ]].
+
+raise-verb-lex := basic-verb-lex & trans-first-arg-raising-lex-item &
+	[SYNSEM.LOCAL [ CAT [ HEAD verb & [ FORM fin ],
+			      VAL [ SPR <  >,
+                                   COMPS < #comps >,
+                                    SUBJ < #sub >,
+                                    SPEC < > ]],
+                              ARG-S < #sub & [LOCAL.CAT [HEAD noun,
+                                                         VAL.SPR < > ]],
+				#comps& [LOCAL.CAT.HEAD [ FORM nom ]]  >  
+        ]]. 
+
+pronoun-lex := noun-lex &
+  [ SYNSEM [ LOCAL.CAT.VAL.SPR 
+                < [ LOCAL.CONT.RELS < ! [PRED pronoun_q_rel] ! > ] >,
+	     LKEYS.KEYREL.PRED 'pronoun_n_rel ] ].
+
+common-noun-lex := noun-lex &
+  [ SYNSEM.LOCAL [ CAT.VAL.SPR 
+		      < [ LOCAL.CONT.RELS < ! [PRED reg_quant_rel] ! > ] >,
+		   CONT.HOOK.INDEX.PNG [ PER third ] ] ].
+
+scopal-adverb-lex := basic-scopal-adverb-lex &
+   [ SYNSEM [ LOCAL [ CAT [ HEAD adv &
+                               [ MOD < [ LOCAL [ CAT.HEAD verb,
+                                                 CONT.HOOK [ LTOP #larg ]]]>],
+                          VAL [ SPR < >,
+                                SUBJ < >,
+                                COMPS < >,
+                                SPEC < > ]],
+                    CONT.HCONS < ! qeq &
+                                   [ HARG #harg,
+                                     LARG #larg ] ! > ],
+            LKEYS.KEYREL.ARG1 #harg ] ].
+
+;; Lexical Rules
+; 
+; initial verb inflection rules
+1sg_verb-lex-rule := infl-ltol-rule &
+  [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+							      NUM sg ]] >,
+    DTR.SYNSEM.LOCAL.CAT.HEAD verb ].
+
+2sg_verb-lex-rule := infl-ltow-rule &
+  [ SYNSEM.LOCAL.CAT.VAL.SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG [ PER second,
+							      NUM sg ]] >,
+    DTR.SYNSEM.LOCAL.CAT.HEAD verb ].
+
+; nominalizing rules, first draft
+; also should put i, ii, igii nominalizing rules
+; here with corresponding sub-rules
+
+nom_verb-lex-rule := infl-ltow-rule &
+  [ SYNSEM.LOCAL.CAT.HEAD verb & [ FORM fin ] ].
+
+
+; phi features
+;
+; Navajo has 'fourth' person, 
+; this is also known as 3rd alternate, for indefinite distant
+
+form := *top*.
+fin := form.
+nom := form.
+
+png := avm &
+  [ PER person,
+    NUM number ].
+
+person := *top*.
+first := person.
+second := person.
+third := person.
+fourth := person.
+
+number := *top*.
+sg := number.
+non-sg := number.
+dual := non-sg.
+pl := non-sg.
+
+;; Phrase level stuff
+
+head-subj-phrase := basic-head-subj-phrase & head-final.
+head-comp-phrase := basic-head-comp-phrase & head-final.
+head-spec-phrase := basic-head-spec-phrase & head-final.
+
+covert-det-phrase := head-only &
+  [ SYNSEM.LOCAL.CAT.VAL [ SPR < >,
+			   SUBJ < >,
+			   COMPS < >,
+			   SPEC < > ],
+    HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL [ SPR < [ LOCAL.CAT.HEAD det ] >,
+				      SUBJ < >,
+				      COMPS < > ],
+			    CONT.HOOK [ INDEX #index,
+					LTOP #larg ] ],
+    C-CONT [ RELS < ! quant-relation & 
+		   [ LBL #ltop,
+		     ARG0 #index,
+		     RSTR #harg ] ! >,
+	     HCONS < ! qeq & 
+		    [ HARG #harg,
+		      LARG #larg ] ! >,
+	     HOOK [ INDEX #index,
+		    LTOP #ltop ]]].
+
+; Quantifiers
+
+quantifier_rel := predsort.
+demonstrative_q_rel := reg_quant_rel.
+non+demonstrative_q_rel := reg_quant_rel.
+proximal+dem_q_rel := demonstrative_q_rel. ; close to speaker
+distal+dem_q_rel := demonstrative_q_rel.   ; away from speaker
+remote+dem_q_rel := distal+dem_q_rel.      ; away from speaker and hearer
+hearer+dem_q_rel := distal+dem_q_rel.      ; near hearer
+def_q_rel := non+demonstrative_q_rel.      ; definite
+indef_q_rel := non+demonstrative_q_rel.    ; indefinite
+
+pronoun_q_rel := quantifier_rel.
+reg_quant_rel := quantifier_rel.
+
+pronoun-covert-det-phrase := covert-det-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.SPR 
+                < [ LOCAL.CONT.RELS < ! [ PRED pronoun_q_rel ] ! > ] >,
+    C-CONT.RELS < ! [ PRED pronoun_q_rel ] ! > ].
+    
+other-covert-det-phrase := covert-det-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.SPR 
+                < [ LOCAL.CONT.RELS < ! [ PRED reg_quant_rel ] ! > ] >,
+    C-CONT.RELS < ! [ PRED def_q_rel ] ! > ].
+
+
+;;; Bibliography
+;;;
+;;; Faltz, Leonard M. (1998)
+;;; The Navajo Verb: A Grammar for Students and Scholars. Albuquerque: University of
+;;; New Mexico Press.
+;;;
+;;; Fernald, Theodore B. and Kenneth L. Hale editors. (2000)
+;;; Dine Bizaad Naalkaah: Navajo language investigations
+;;; Working Papers on Endangered and Less Familiar Language Volume 3. 
+;;; Cambridge, MA: MIT Working Papers. 
+;;;
+;;; Young, Robert W. and William Morgan, Sr. (1987)
+;;; The Navajo Language: a Grammar and Colloquial Dictionary. Albuquerque: University
+;;; of New Mexico Press. Revision of Young and Morgan (1984). 

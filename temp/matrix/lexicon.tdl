@@ -1,0 +1,348 @@
+;;; r is not in Navajo, so r is ' glottal stop or ejective marker
+;;; Not sure how to represent nasal vowels or tones yet, so they are omitted
+;;; in this revision
+
+;;; Need to find a way to account for the animacy hierarchy, which limits
+;;; which noun can come first in a sentence with two 3rd person nominals.  
+;;; Nominals with higher animacy, like Humans and Animals must come before 
+;;; nominal elements with a lower ranking.: 
+;;; Also need to account for 'handling verbs' like carry, put, move, etc. 
+;;; These verbs have an inflection which changes based on the material being 
+;;; handled.  Roughly 8 categories, detail in Witherspoon 1971 and 1977
+
+;; Nouns
+
+ashkii := common-noun-lex &
+	[ STEM < "ashkii" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_boy_n_rel ].
+	  
+awee := common-noun-lex &
+	[ STEM < "awee" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_child_n_rel ].
+
+ateed := common-noun-lex &
+	[ STEM < "ateed" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_girl_n_rel ].
+
+hastiin := common-noun-lex &
+	[ STEM < "hastiin" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_man_n_rel ].
+
+dine := common-noun-lex &
+	[ STEM < "dine">,
+	  SYNSEM.LKEYS.KEYREL.PRED '_person_n_rel ].
+
+asdzaan := common-noun-lex &
+	[ STEM < "asdzaan" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_woman_n_rel ].
+	  
+asdzani := common-noun-lex &
+	[ STEM < "asdzani" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_woman_n_rel ].
+
+mosi := common-noun-lex &
+	[ STEM < "mosi" >, 
+	  SYNSEM.LKEYS.KEYREL.PRED '_cat_n_rel ].
+
+beegashii := common-noun-lex &
+	[ STEM < "beegashii" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_cow_n_rel ].
+
+leechaari := common-noun-lex & 
+	[ STEM < "leechaari" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_dog_n_rel ].
+
+chral := common-noun-lex &
+	[ STEM < "chral" > ,
+	SYNSEM.LKEYS.KEYREL.PRED '_frog_n_rel ].
+	
+lii¨:= common-noun-lex &
+	[ STEM < "lii" > ,
+  	  SYNSEM.LKEYS.KEYREL.PRED '_horse_n_rel ].
+
+dibe := common-noun-lex &
+	[ STEM < "dibe" > ,
+	SYNSEM.LKEYS.KEYREL.PRED '_sheep_n_rel ].
+
+bilasaana := common-noun-lex &
+	[ STEM < "bilasaana" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_apple_n_rel ].
+
+baah := common-noun-lex &
+	[ STEM < "baah" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_bread_n_rel ].
+	
+gohweeh := common-noun-lex &
+	[ STEM < "gohweeh" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_coffee_n_rel ].
+	  
+chriyaan := common-noun-lex &
+	[ STEM < "chriyaan" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_food_n_rel ].
+
+daa := common-noun-lex &
+	[ STEM < "daa" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_food_n_rel ].
+
+aber := common-noun-lex &
+	[ STEM < "aber" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_milk_n_rel ].
+
+chril_ahwehe := common-noun-lex &
+	[ STEM < "chril","ahwehe" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_tea_n_rel ].
+
+naaltsoos := common-noun-lex &
+	[ STEM < "naaltsoos" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_book_n_rel ].
+
+chidi := common-noun-lex &
+	[ STEM < "chidi" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_chidi_n_rel ].
+
+beeso := common-noun-lex &
+	[ STEM < "beeso" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_money_n_rel ].
+
+beerakrerlchihi := common-noun-lex &
+	[ STEM < "beerakrerlchihi" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_pencil_n_rel ].
+
+naalkidi := common-noun-lex &
+	[ STEM < "naalkidi" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_television_n_rel ].
+
+tsin := common-noun-lex &
+	[ STEM < "tsin" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_tree_n_rel ].
+
+tseso := common-noun-lex &
+	[ STEM < "tseso" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_glass_n_rel ].
+
+beesh_adee := common-noun-lex &
+	[ STEM < "beesh","adee">,
+	  SYNSEM.LKEYS.KEYREL.PRED '_spoon_n_rel ].
+
+dloo := common-noun-lex &
+        [ STEM < "dloo" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_weasel_n_rel ].
+
+; pronouns
+
+shi := pronoun-lex &
+        [ STEM < "shi" >,
+          SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					     NUM sg ] ].
+
+ni := pronoun-lex &
+        [ STEM < "ni" >,
+          SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER second,
+					     NUM sg ] ].
+
+bi := pronoun-lex &
+        [ STEM < "bi" >,
+          SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER third,
+					     NUM sg ] ].
+
+ho := pronoun-lex &
+        [ STEM < "ho" >,
+          SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER fourth,
+					     NUM sg ] ].
+
+; 1st and 2nd plural and dual-plural are homophonous, but matrix chokes on it
+; so I added and extra i to the 2nd person
+
+nihi := pronoun-lex &
+        [ STEM < "nihi" >,
+          SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					     NUM dual ] ].
+
+nihii := pronoun-lex &
+        [ STEM < "nihii" >,
+          SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER second,
+					     NUM dual ] ].
+
+danihi := pronoun-lex &
+        [ STEM < "danihi" >,
+          SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					     NUM pl ] ].
+
+danihii := pronoun-lex &
+        [ STEM < "danihii" >,
+          SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER second,
+					     NUM pl ] ].
+
+daabi := pronoun-lex &
+        [ STEM < "daabi" >,
+          SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER third,
+					     NUM pl ] ].
+
+daaho := pronoun-lex &
+        [ STEM < "daaho" >,
+          SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER fourth,
+					     NUM pl ] ].
+
+doo := scopal-adverb-lex &
+	[ STEM < "doo" >,
+	  SYNSEM.LKEYS.KEYREL.PRED 'neg_r_rel,
+	  SYNSEM.LOCAL.CAT.HEAD [ MOD < [ LOCAL.CAT [ HEAD verb, 
+	  				   VAL [ COMPS < >,
+					         SUBJ < anti-synsem > ]]]>]].
+
+;; Verbs
+;; 
+;; Need some way to represent the fact that most verb do not require 
+;; associated nouns, unless it is 3rd person.  All person and number features
+;; are infections on the verb.  
+;
+; Going to split verb into required adverb and basic verb, not perfect
+; yet, but will sketch below verbs
+
+; intransitive
+;naagha := intransitive-verb-lex &
+;  [ STEM < "naagha" > ,
+;    SYNSEM.LKEYS.KEYREL.PRED '_walks_v_rel].
+;
+gha := intransitive-verb-lex &
+  [ STEM < "gha" > ,
+    SYNSEM.LKEYS.KEYREL.PRED '_walks_v_rel].
+
+; actually na + gha, will have spelling changes on gha, 
+; forms naasha 1st nanina 2nd naagha 3rd 
+;       na sha     na nina    na gha
+
+; not sure how to represent this, but you use the postposition -di
+; with the verb walk around to say 'live', just leaving out for now
+; eg 'Seattledi naasha' -> Seattle-in I-walk-around -> I live in Seattle
+
+niikaah := intransitive-verb-lex &
+	[ STEM < "niikaah" > ,
+      	  SYNSEM.LKEYS.KEYREL.PRED '_come_v_rel ].
+      
+daastaah := intransitive-verb-lex &
+	[ STEM < "daastaah" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_die_v_rel ].
+
+chahalheel := intransitive-verb-lex &
+	[ STEM < "chahalheel" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_fall_v_rel ].
+      
+bidi_naagha := intransitive-verb-lex &
+	[ STEM < "bidi","naagha" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_live_v_rel ].
+
+naashne := intransitive-verb-lex &
+        [ STEM < "naashne" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_play_v_rel ].
+; same split as naagha, 
+		  
+ashhosh := intransitive-verb-lex &
+        [ STEM < "ashhosh" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_sleep_v_rel ].
+
+hatsrihyaa_dishni := intransitive-verb-lex &
+        [ STEM < "hatsrihyaa","dishni" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_sneeze_v_rel ].
+		  
+baa_hinishti := intransitive-verb-lex &
+        [ STEM < "baa","hinishti" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_wait_v_rel ].
+
+chreenisdziid := intransitive-verb-lex &
+        [ STEM < "chreenisdziid" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_wakeup_v_rel ].
+		  
+yishaalh := intransitive-verb-lex &
+        [ STEM < "yishaalh" > ,
+	  SYNSEM.LKEYS.KEYREL.PRED '_walk_v_rel ].
+		  
+
+      
+; transitive
+;
+; The baa elements are post positions preceded by the object
+; not sure how to represent this yet...
+
+baa_nahashniih := transitive-verb-lex &
+	[ STEM < "baa_nahashniih" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_buy_v_rel].
+	    
+yishdlav := transitive-verb-lex &
+        [ STEM < "yishdlav" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_drink_v_rel].
+		  
+yishav := transitive-verb-lex &
+        [ STEM < "yishav" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_eat_v_rel].
+
+bee_ndiishneeh := transitive-verb-lex &
+        [ STEM < "bee_ndiishneeh" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_hurt_v_rel].
+		  
+ayoi_ooshrni := transitive-verb-lex &
+        [ STEM < "ayoi_ooshrni" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_love_v_rel].
+		  
+anaanalneeh := transitive-verb-lex &
+        [ STEM < "anaanalneeh" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_make_v_rel].
+		  
+yinishta := transitive-verb-lex &
+        [ STEM < "yinishta" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_read_v_rel].
+		  
+yiistseeh := transitive-verb-lex &
+        [ STEM < "yiistseeh" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_see_v_rel].
+		  
+yidleesh := transitive-verb-lex &
+	[ STEM < "yidleesh" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_paints_v_rel].
+
+nisin := transitive-verb-lex &
+	[ STEM < "nisin" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_want_v_rel].
+
+; this entry has a verb stem change based on the material being washed
+; most common listed here, meaning flat solid surface being washed
+tanasgis := transitive-verb-lex &
+	[ STEM < "tanasgis" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_wash_v_rel].
+
+binaalh := transitive-verb-lex &
+	[ STEM < "binaalh" >,
+	  SYNSEM.LKEYS.KEYREL.PRED '_watch_v_rel].
+
+;; Determiners
+
+; eii and dii can also stand alone pronominally
+eii := det-lex &
+	[ STEM <"eii">,
+	  SYNSEM.LKEYS.KEYREL.PRED distal+dem_q_rel ].
+
+dii := det-lex &
+	[ STEM <"dii">,
+	  SYNSEM.LKEYS.KEYREL.PRED proximal+dem_q_rel ].
+
+; naghai means distant, but visible, nilei is distant, non-visible
+; may need middle level between proximal and remote for naghai
+
+naghai := det-lex &
+	[ STEM <"naghai">,
+	  SYNSEM.LKEYS.KEYREL.PRED proximal+dem_q_rel ].
+
+nilei := det-lex &
+	[ STEM <"nilei">,
+	  SYNSEM.LKEYS.KEYREL.PRED remote+dem_q_rel ].
+
+ei := det-lex &
+	[ STEM <"ei">,
+	  SYNSEM.LKEYS.KEYREL.PRED remote+dem_q_rel ].
+
+;;; Bibliography
+;;;
+;;; Witherspoon, Gary J. (1971)
+;;;  "Navajo categories of objects at rest," American Anthropologist 73.110-127
+;;; Witherspoon, Gary J. (1977)
+;;;   Language and Art in the Navajo Universe. Ann Arbor: University of Michigan Press

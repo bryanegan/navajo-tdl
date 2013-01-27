@@ -1,0 +1,34 @@
+n-label := label &
+  [ SYNSEM.LOCAL.CAT [ HEAD noun,
+	               VAL.SPR < synsem > ],
+    LABEL-NAME "N"].
+
+r-label := label &
+  [ SYNSEM.LOCAL.CAT [ HEAD adv ],
+    LABEL-NAME "R"].
+
+d-label := label &
+  [ SYNSEM.LOCAL.CAT [ HEAD det ],
+    LABEL-NAME "D"].
+
+np-label := label &
+  [ SYNSEM.LOCAL.CAT [ HEAD noun,
+                       VAL.SPR < > ],
+    LABEL-NAME "NP"].
+
+v-label := label &
+  [ SYNSEM.LOCAL.CAT [ HEAD verb,
+                       VAL.COMPS < synsem > ],
+    LABEL-NAME "V"].
+
+vp-label := label &
+  [ SYNSEM.LOCAL.CAT [ HEAD verb,
+                       VAL.COMPS < >,
+			VAL.SUBJ < synsem >  ],
+     LABEL-NAME "VP"].
+
+s-label := label &
+   [ SYNSEM.LOCAL.CAT [ HEAD verb, 
+			VAL.COMPS < > ,
+			VAL.SUBJ < anti-synsem > ],
+     LABEL-NAME "S"].

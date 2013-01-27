@@ -1,0 +1,15 @@
+; File for spelling preserving lexical rules, i.e., instances
+; of (subtypes of) infl-ltol-rule and infl-ltow-rule.
+
+; Every rule in this file should have a %suffix line.  Those
+; that don't belong in lrules.tdl.
+%(letter-set (!s abcedfghijklmnopqrtuvwxyz))
+
+; this will apply just to the stem,
+1sg_verb :=
+%prefix (gh sh)
+1sg_verb-lex-rule.
+
+2sg_verb :=
+%prefix (gh nin)
+2sg_verb-lex-rule.
